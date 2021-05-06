@@ -94,9 +94,18 @@
   - https://testing-react-01-sofyan.netlify.app/
   - Kalau pakai git perlu disambungkan ke reponya
 
+- Alasan belajar class dan function component
+
+  - Class component masih sering diujikan ketika test kerja
+  - Function component itu beberapa masih belum diimplementasikan codebase di startup2 yang built app nya sebelum react 16.8
+
 - React Hooks
 
   - Fungsi-fungsi yang disediakan react untuk menjalankan perintah perintah sebelum atau sesudah react di render biasanya mendapatkan data mengubah komponen lain dsb
+  - Hooks di react baru dikeluarkan di versi 16.8
+  - Hooks memungkinkan pakai state dan lifecycle di function component
+  - Stateless (komponen yang menampilkan template tapi bisa menerima props dulu function component) dan Stateful component (komponen yang memiliki state dulu class component) tapi sekarang function component sudah bisa pakai states
+  - Di react bisa pakai class atau function -> kalau function component tidak perlu this
 
 - Baca baca sesi react untuk advanced disini : https://github.com/john-smilga/react-advanced-2020
 
@@ -113,6 +122,7 @@
   - Ke 1-error-sample buat React Fragment
   - React Fragment adalah pembungkus element child-child. Misal jika lebih dari 1. Karena komponen react harus ada 1 parent tapi kalau parent element tidak mau di render, misal div, maka pakai <React.Fragment></React.Fragment> atau shortnya <> </>
   - Ketika ada sebuah variabel di ubah melalui method komponen, maka tidak langsung ter render
+  - UseState dan useEffect khusus untuk function component
 
 - UseState ada default value, Dia adalah array index 0 adalah value state, index 1 adalah function peubah state
 
@@ -121,6 +131,10 @@
   - Setiap hooks di react biasanya menggunakan use didepannya dan diimport dari module react
   - Component yang menggunakan hooks harus PascalCase
   - Kalau yang diimport React maka untuk menggunakan useState => React.useState([]) (ingat object / class)
+  - useState disarankan tidak menggunakan object, karena kalau mengubah salah satu properti maka harus menulis setiap properti di function peubahnya
+  - useState selalu return array
+
+- Untuk melihat perubahan di komponent di website bisa cek di inspect element di chrome dev tools kalau sudah menginstall extension react
 
 - Perlu diingat setiap perintah javascript di JSX harus di dalam {} seperti EJS <% %> di HTML
 
@@ -140,6 +154,10 @@
 
 
 - useEffect -> perintah perintah yang dilakukan kalau komponent sudah render atau re-render. Ada cleanup function juga
+
+  - useEffect kalau di class component seperti componentDidMount
+  - useEffect juga sebagai watcher jika state berubah karena param ke 2 adalah array [] (bisa watch lebih dari 1 state, masukkan ke array itu)
+  - Kita bis gunakan 2 useEffect dalam 1 function component
   - Cara mudah mengetahui kapan proses use effect dijalankan console.log di dalam use effect dan console.log di dalam komponen ketika render
   - Gunakan react strict mode di app.js ketika sudah pakai useeffect
   - Setiap state berubah di komponen, maka rerender lalu menjalankan useEffect
@@ -153,10 +171,36 @@
     - Cleanup berguna ketika tidak me-render / membuang komponen, maka tidak ada residu
   - UseEffect untuk fetch data API contohnya parsing data JSON
     - Async function tidak bisa diletakkan dalam callback useEffect jadi pisahkan di function luar
-    - Jika taruh setUsers (peubah state) di dalam function yang kita panggil di useEffect karena akan terjadi rekursif, jadi gunakan skipping effect di useEffect (render sekali) misalkan [] (arr kosong)
+  - Jika taruh setUsers (peubah state) di dalam function yang kita panggil di useEffect karena akan terjadi rekursif, jadi gunakan skipping effect di useEffect (render sekali) misalkan [] (arr kosong)
+  - Kalau di class taruh fetch di componentDidMount
     - Setiap iterasi render misal pakai map maka yang dirender tambahkan attribute key pakai id nya
   - Conditional Rendering
     - Ketika membuat komponent butuh return JSX jika ada 2 return maka return dibawahnya tidak di render. Bagaimana jika kita butuh render bagian tertentu dari komponent sesuai kebutuhan state
     - Contohnya ketika kondisi fetch data belum selesai maka tampilkan JSX loading, jika sudah selesai tampilkan JSX card data
-  - LANJUT --> 5:45:15
+  - Cara mensimulasikan apakah loading berjalan, di inspect element di network / no trottling (pilih 3G)
+  - Jika menggunakan fetch api routingnya salah, maka tidak trigger ke error tapi langsung error 404 di browser (karena catch di fetch khusus network)
+    - di then tambahkan condition jika response.status >= 200 dan dibawah 299 maka berhasil
+    - else setLoadingFalse, setError true dan throw new error 
+  - Short Circuit Evaluation dan ternary operator
+    - Menggunakan default value dengan OR `const value = text || "no text"` jika text false, maka menampilkan no text, jika benar maka menampilkan text
+    - Menggunakan default value AND `const value = text && "show menu"` Jika falsy tidak menampilkan apapun, jika benar maka menampilkan show menu
+    - Biasanya || untuk mengisi default value, && untuk menampilkan element
+    - Coba gunakan button untuk toggle state yang menampilkan element tertentu
+    - Misal dengan membuat function diluar atau mempassing di onClick setState(negasi state) -> value yang dipassing ke seterror adalah negasi (true jadi false, false jadi true
+    - Gunakan ternary juga sama dengan ternary di JS
+  - Gunakan show/hide component dengan Short Circuit Evaluation (default value &&) dengan memanggil component di component lain
+  - LANJUT -> 6.32:43
+
+  
+
+  ---------
+
+  
+
+- Custom hooks digunakan ketika kita membuat codingan setiap komponen secara berulang
+
+  - Jadi pisahkan ke dalam file yang berbeda, kodingan bisa diletakkan di function lalu return state statenya
+  - export default maka functionnya
+  - Panggil custom hooks seperti memanggil useState (bentuk sama) jadi kalau useState biasa mereturn state dan function peubah
+  - Custom hooks adalah hook yang kita buat sendiri sesuai kebutuhan
 

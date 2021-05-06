@@ -7,7 +7,19 @@ const MultipleReturns = () => {
 
   useEffect(()=> {
     fetch(url)
-    .then(res => res.json())
+    .then(res => {
+      console.log(res)
+      if(res.status >= 200 && res.status <= 299){
+        setLoading(false)
+        setError(false)
+        return res.json()
+      }
+      else{
+        setLoading(false)
+        setError(true)
+        throw new Error(res.statusText)
+      }
+    })
     .then(user => {
       const {login} = user
       setUsers(login)
@@ -20,7 +32,7 @@ const MultipleReturns = () => {
 
   if(isLoading){
     return (
-      <h2>Loading...</h2>
+      <h2>Loading....</h2>
     )
   }
 

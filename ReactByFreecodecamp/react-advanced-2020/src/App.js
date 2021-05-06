@@ -12,7 +12,9 @@ import React from 'react'
 // import Final from './tutorial/1-useState/setup/4-useState-object'
 // import Final from './tutorial/1-useState/setup/5-useState-counter'
 // import Final from './tutorial/2-useEffect/final/3-useEffect-fetch-data'
-import Condition from './tutorial/3-conditional-rendering/setup/1-multiple-returns'
+// import Condition from './tutorial/3-conditional-rendering/setup/1-multiple-returns'
+// import Condition from './tutorial/3-conditional-rendering/setup/2-short-circuit'
+import Condition from './tutorial/3-conditional-rendering/setup/3-show-hide'
 
 
 function App() {
