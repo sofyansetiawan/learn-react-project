@@ -189,13 +189,76 @@
     - Misal dengan membuat function diluar atau mempassing di onClick setState(negasi state) -> value yang dipassing ke seterror adalah negasi (true jadi false, false jadi true
     - Gunakan ternary juga sama dengan ternary di JS
   - Gunakan show/hide component dengan Short Circuit Evaluation (default value &&) dengan memanggil component di component lain
-  - LANJUT -> 6.32:43
-
   
+- Form React
 
-  ---------
+  - Ketika onSubmit handleSubmit e.preventDefault()
+  - Pisahkan state setiap input form dengan default value string kosong ""
+  - Ketika value input diisi state, error karena harus di handle onchange
+  - OnChange tambahkan callback dengan 1 parameter (yang mewakili elemen input) dan e.target.value
+  - Jika ada data yang perlu ditampung dulu `setPeople((people) => { return [...people, person] // add orang baru ke array jabaran lama })`
 
-  
+  - Kosongkan setelah submit
+  - Ingat setiap looping JSX harus ada key yang unique
+  - Bisa menggunakan id dari data atau uuid dari date
+
+- Kita bisa gunakan 1 useState untuk form dengan banyak input dengan mangisi argument di useState dengan object berisi properti value defaultnya. Object itu akan jadi destructur dari variabel state
+
+  - Gunakan 1 handleChange saja untuk menangkap setiap perubahan semua input
+  - Gunakan dynamic object properti dengan spread operator di dalam object dan properti yang value mau diganti `setPerson({...person, [name]: value})`
+
+- useRef
+
+  - Sifatnya seperti v-bind di Vue
+  - Mendapatkan sebuah data/state tapi berbeda dengan state
+  - Diletakkan di DOM sebagai attribute
+  - Tidak melakukan re-render untuk komponen itu.
+  - Ref akan memanggil element secara keseluruhan dan mendapat semua propertinya
+  - Gunakan useEffect untuk memberikan perintah di properti ref element tersebut
+
+- useReducer
+
+  - Biasanya digunakan untuk menghandle banyak perintah rumit mengingat struktur komponen semakin kompleks
+  - Membuatkan kondisi untuk mempengaruhi state yang banyak
+  - Reducer sifatnya seperti management state di vuex, state dikumpulkan jadi 1
+  - param 1 : reducer, param 2 : default value (misal object dengan banyak state)
+  - reducer adalah handle state dan action yang dipanggil secara callback
+  - default state diwakili state dan reducer diwakili dispatch (argument di dispacth jadi value dari action reducer)
+  - Sifat useReducer ini mirip dengan state management Vuex (dispatch, action dan state)
+  - Kamu bisa pisahkan reducer dan actionnya di file lain
+
+- Prop Drilling
+
+  - Cara mempassing data melalui props ke komponent-komponen dalam hirarki sampai ke komponent yang membutuhkan data tersebut. Tapi beberapa komponen mungkin tidak menggunakan prop tersebut. Hanya melewatkan ke bawah
+  - Misal sebuah komponen tidak membutuhan removeData tapi child membutuhkan function itu
+  - Caranya harus di passing menjadi prop setiap komponen dan invoke componentnya menjadi prop lagi
+  - Jika ada data di passing ke  `{...person}` dan `removePerson={removePerson}` lalu di destructuring `{id, name, removePerson}`
+
+- Context API
+
+  - Untuk menghindari prop drilling
+  - Seperti prototype oop
+  - Menggunakan `React.createContext()`
+  - Terdiri dari 2 component Provider, Consumer
+  - Provider yang menyediakan dan blast data/state untuk bisa dipakai semua komponen tanpa sediakan props
+  - Buatkan provider `<PersonContext.Provider value="hello">` tampung dalam value
+  - Consumer `useContext(PersonContext)`
+  - Bisa gunakan object untuk menampung variabel, function untuk bisa dipakai semua komponen `<PersonContext.Provider *value*={{removePerson}}>`
+
+- Custom Hooks
+
+  - Cara untuk mengumpulkan bagian penting sehingga bisa dipakai berkali kali tanpa redundan
+  - Pindahkan useState, function dan useEffect
+  - Return object dari state state yang dibuat supaya bisa dipakai ditempat lain
+  - Tambahkan parameter kalau diperlukan dan jangan lupa di export
+  - Panggil seperti useEffect di file yang memanggil custom hooks, bedanya tergantung hasil return apakah array atau object
+  - Lanjut -> 08:38:18
+
+
+
+---------
+
+
 
 - Custom hooks digunakan ketika kita membuat codingan setiap komponen secara berulang
 
