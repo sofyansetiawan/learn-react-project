@@ -26,7 +26,13 @@ import React from 'react'
 
 // import Context from './tutorial/8-useContext/setup/1-context-api'
 
-import CustomHooks from "./tutorial/9-custom-hooks/setup/1-fetch-example"
+// import CustomHooks from "./tutorial/9-custom-hooks/setup/1-fetch-example"
+
+// import PropTypes from './tutorial/10-prop-types/setup'
+
+// import Router from './tutorial/11-react-router/setup'
+
+import Memo from "./tutorial/12-memo-useMemo-useCallback/setup"
 
 
 function App() {
@@ -41,7 +47,10 @@ function App() {
       {/* <ExampleReducer/> */}
       {/* <PropDrilling/> */}
       {/* <Context/> */}
-      <CustomHooks/>
+      {/* <CustomHooks/> */}
+      {/* <PropTypes/> */}
+      {/* <Router/> */}
+      <Memo/>
     </div>
   )
 }

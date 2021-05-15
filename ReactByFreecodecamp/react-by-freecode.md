@@ -252,18 +252,63 @@
   - Return object dari state state yang dibuat supaya bisa dipakai ditempat lain
   - Tambahkan parameter kalau diperlukan dan jangan lupa di export
   - Panggil seperti useEffect di file yang memanggil custom hooks, bedanya tergantung hasil return apakah array atau object
-  - Lanjut -> 08:38:18
+  - Custom hooks digunakan ketika kita membuat codingan setiap komponen secara berulang
+
+    - Jadi pisahkan ke dalam file yang berbeda, kodingan bisa diletakkan di function lalu return state statenya
+    - export default maka functionnya
+    - Panggil custom hooks seperti memanggil useState (bentuk sama) jadi kalau useState biasa mereturn state dan function peubah
+    - Custom hooks adalah hook yang kita buat sendiri sesuai kebutuhan
+
+- Prop Types
+
+  - Jika ada kasus untuk properti di object tidak ada / undefined perlu ditangani. Contoh sebuah product tidak punya price atau image
+  - Ingat sifat object jika mengakses properti yang undefined lalu akses prop di dalamnya maka error
+  - Import prop-types ke komponen yang mebutuhkan
+  - Kita bisa gunakan model object required dan defaultProps seperti di OOP prototype
+  - Gunakan short circuit atau default value juga bisa
+  - Membuat proptype bisa gunakan shortcut `rafce`
+
+- React Router
+
+  - Pasang react-router-dom di NPM
+  - Import semua halaman yang dibutuhkan ke router
+  - Import semua Router, Route, Switch
+  - Semua routing didalam return JSX Router
+  - Route sebagai penampung routing path dan menampung komponen mana yang di load ketika path itu
+  - Ketika pakai pola routing biasa, maka routing "/" selalu di load ketika akses child nya (karena path match) tambahkan exact di homepage atau sesuai kebutuhan
+  - Gunakan * untuk matching pattern selain path lainnya dan tempatkan di paling bawah
+  - Pakai komponent Switch agar router pertama yang match saja yang dirender
+  - Jika ingin komponen selalu di render di setiap route tempatkan di luar switch. Misal navbar
+  - Gunakan komponent Link dari react router dom
+  - `<Link to="/" className="btn">Home</Link>`
+  - Untuk routing dengan parameter gunakan `/:namaparam`
+    - Gunakan attribute/props berisi nama komponen`children={<Person/>}`
+  - Jika menggunakan parameter gunakan useParams() dan set find dari data ke state
+
+- Performance Optimization
+
+  - React sebenarnya sudah cepat tapi lebih baik jika dioptimalkan
+  - Gunakan useCallback dan useMemo
+  - Simulasikan dengan console.count() untuk menghitung berapa kali komponen di render
+  - Untuk menghindari merender sebanyak item tersebut berkali kali gunakan memo
+  - Pasang React.memo ke komponen besar yang meloop komponen2 kecil misal BigList
+  - Wrap komponen itu kedalam callback memo
+  - React memo tidak merender ulang komponen jika dilihat dari console.count
+  - React.memo memeriksa apakah value di component berubah, jika tidak maka tidak perlu render dan turunan komponennya (tidak bergantung render komponen tapi value)
+  - Sarannya adalah untuk nilai2 cukup diterapkan di parentnya
+  - Ketika melakukan prop drilling ke komponen bawah maka akan render lagi
+  - Gunakan useCallback untuk mengatasi hal ini 
+
+- UseCallback
+
+  - Jika value / props berubah, maka kita membuat function yang baru
+  - Bungkus function tersebut dalam usecallback
+  - Berikan value defaultnya berupa array berisi default value dari yang diubah useEffect (jika tidak maka tidak akan berubah valuenya)
+  - Value dari state berubah tapi function baru tidak mendapatkan value itu
+  - Tambahkan useCallback di fetch getProduct juga
+  - Jadi jika value default berubah, maka buat function baru itu (getProduct itu, jika tidak berubah tidak membuat baru)
 
 
 
----------
 
-
-
-- Custom hooks digunakan ketika kita membuat codingan setiap komponen secara berulang
-
-  - Jadi pisahkan ke dalam file yang berbeda, kodingan bisa diletakkan di function lalu return state statenya
-  - export default maka functionnya
-  - Panggil custom hooks seperti memanggil useState (bentuk sama) jadi kalau useState biasa mereturn state dan function peubah
-  - Custom hooks adalah hook yang kita buat sendiri sesuai kebutuhan
 

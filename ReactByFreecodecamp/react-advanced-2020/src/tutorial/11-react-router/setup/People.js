@@ -10,6 +10,7 @@ const People = () => {
         return (
           <div key={person.id} className='item'>
             <h4>{person.name}</h4>
+            <Link className="btn" to={`/person/${person.id}`}>Detail</Link>
           </div>
         );
       })}
